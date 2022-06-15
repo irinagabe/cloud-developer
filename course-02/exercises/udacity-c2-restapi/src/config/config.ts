@@ -1,13 +1,13 @@
 export const config = {
   "dev": {
-    "username": "glitchyadmin",
-    "password": "Booyashaka97$",
-    "database": "udagram",
-    "host": "glitchyrds.c1zfvd5p3rot.us-east-1.rds.amazonaws.com",
+    "username": process.env.POSTGRES_USERNAME,
+    "password": process.env.POSTGRES_PASSWORD,
+    "database": process.env.POSTGRES_DB,
+    "host": process.env.POSTGRES_HOST,
     "dialect": "postgres",
-    "aws_region": "us-east-1",
-    "aws_profile": "default",
-    "aws_media_bucket": "udagramglitchy"
+    "aws_region": process.env.AWS_REGION,
+    "aws_profile": process.env.AWS_PROFILE,
+    "aws_media_bucket": process.env.AWS_MEDIA_BUCKET
   },
   "jwt": {
     "secret": " "

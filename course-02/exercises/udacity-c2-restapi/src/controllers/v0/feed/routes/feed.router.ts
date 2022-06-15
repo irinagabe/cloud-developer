@@ -16,15 +16,32 @@ router.get('/', async (req: Request, res: Response) => {
     res.send(items);
 });
 
-//@TODO
+//@TODO ✅
 //Add an endpoint to GET a specific resource by Primary Key
+router.get('/:id', async (req: Request, res: Response) => {
+    let { id } = req.params;
+    const item = await FeedItem.findByPk(id);
+    if (item.url) {
+        item.url = AWS.getGetSignedUrl(item.url);
+    }
+    res.send(item);
+})
 
 // update a specific resource
 router.patch('/:id', 
     requireAuth, 
     async (req: Request, res: Response) => {
         //@TODO try it yourself
-        res.status(500).send("not implemented")
+        let { id } = req.params;
+        let item = await FeedItem.findByPk(id);
+        let caption = req.body.caption;
+        let fileName = req.body.url;
+
+        if (item) {
+            await item.update({ caption: caption, url: fileName})
+            res.status(200).send(item)
+        }
+        
 });
 
 
